@@ -12,7 +12,7 @@ const Hero = styled.section`
   background-position: center;
   background-repeat: no-repeat;
 
-  color: white;
+  color: ${({ theme }) => theme.text};
   text-align: center;
   position: relative;
 
@@ -20,7 +20,7 @@ const Hero = styled.section`
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: ${({ theme }) => theme.overlay};
   }
 `;
 
@@ -46,13 +46,15 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
 
+  background: ${({ theme }) => theme.button};
+  color: ${({ theme }) => theme.buttonText};
+
   &:hover {
-    background: black;
-    color: white;
+    opacity: 0.9;
   }
 `;
 
-function Home() {
+function Home({ darkMode, setDarkMode }) {
   return (
     <Hero>
       <Content>
@@ -62,7 +64,9 @@ function Home() {
           Discover the latest fashion and trends.
         </Description>
 
-        <Button>Shop Now</Button>
+        <Button onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </Button>
       </Content>
     </Hero>
   );
